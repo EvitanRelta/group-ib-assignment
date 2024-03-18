@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { SettingsContext, MessagesContext } from '../contexts'
+import './Notification.css'
 
 interface NotificationProps {
     messageId: string
@@ -30,12 +31,13 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
 
     return (
         <div
+            className='notif-box'
             style={{
                 opacity: fadeOut ? 0 : 1,
                 transition: `opacity ${FADE_TIME_MS}ms`,
             }}
         >
-            {content}
+            <div className='notif-text'>{content}</div>
         </div>
     )
 }

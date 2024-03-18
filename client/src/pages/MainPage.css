@@ -1,0 +1,24 @@
+.notif-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 32px;
+}
+
+.notif-container.top {
+    top: 72px; /* Below the nav bar. */
+}
+
+.notif-container.bottom {
+    bottom: 0;
+    flex-direction: column-reverse;
+}
+
+.notif-container.left {
+    left: 0;
+}
+
+.notif-container.right {
+    right: 0;
+}

@@ -13,7 +13,7 @@ interface SettingsContextType {
 export const SettingsContext = createContext<SettingsContextType>()
 export const SettingsProvider: React.FC<any> = ({ children }) => {
     const [maxCount, setMaxCount] = useState(2)
-    const [position, setPosition] = useState(0)
+    const [position, setPosition] = useState(1)
     const [disappearTime, setDisappearTime] = useState(5)
 
     return (
