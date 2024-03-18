@@ -1,11 +1,17 @@
-import React from 'react'
-import { NotificationList } from './NotificationList'
+import React, { useState } from 'react'
 import { Settings } from './types'
+import { Main } from './Main'
 
-const App: React.FC<Settings> = () => {
+const App: React.FC = () => {
+    const [settings, setSettings] = useState<Settings>({
+        maxCount: 2,
+        disappearTime: 5000,
+        position: 0,
+    })
+
     return (
         <div>
-            <NotificationList maxCount={2} disappearTime={5000} position={0} />
+            <Main {...settings} />
         </div>
     )
 }
