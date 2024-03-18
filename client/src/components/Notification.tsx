@@ -15,17 +15,22 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
     const timerRef = useRef<NodeJS.Timeout | null>(null)
 
     const fadeOutAndRemoveMessage = () => {
-        if (timerRef.current) {
-            clearTimeout(timerRef.current)
-        }
+        if (timerRef.current) clearTimeout(timerRef.current)
         setFadeOut(true)
         setTimeout(() => {
             messagesState.removeMessage(messageId)
         }, FADE_TIME_MS)
     }
 
-    useEffect(() => {
+    const stopTimer = () => {
+        if (timerRef.current) clearTimeout(timerRef.current)
+    }
+    const startTimer = () => {
         timerRef.current = setTimeout(fadeOutAndRemoveMessage, settingsState.disappearTime * 1000)
+    }
+
+    useEffect(() => {
+        startTimer()
 
         return () => {
             if (timerRef.current) {
@@ -41,6 +46,8 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
                 opacity: fadeOut ? 0 : 1,
                 transition: `opacity ${FADE_TIME_MS}ms`,
             }}
+            onMouseEnter={stopTimer}
+            onMouseLeave={startTimer}
         >
             <div className='notif-text'>{content}</div>
             <button className='close-button' onClick={fadeOutAndRemoveMessage}>
