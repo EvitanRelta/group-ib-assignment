@@ -14,13 +14,18 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
     const [fadeOut, setFadeOut] = useState(false)
     const timerRef = useRef<NodeJS.Timeout | null>(null)
 
+    const fadeOutAndRemoveMessage = () => {
+        if (timerRef.current) {
+            clearTimeout(timerRef.current)
+        }
+        setFadeOut(true)
+        setTimeout(() => {
+            messagesState.removeMessage(messageId)
+        }, FADE_TIME_MS)
+    }
+
     useEffect(() => {
-        timerRef.current = setTimeout(() => {
-            setFadeOut(true)
-            setTimeout(() => {
-                messagesState.removeMessage(messageId)
-            }, FADE_TIME_MS)
-        }, settingsState.disappearTime * 1000)
+        timerRef.current = setTimeout(fadeOutAndRemoveMessage, settingsState.disappearTime * 1000)
 
         return () => {
             if (timerRef.current) {
@@ -38,7 +43,7 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
             }}
         >
             <div className='notif-text'>{content}</div>
-            <button className='close-button'>
+            <button className='close-button' onClick={fadeOutAndRemoveMessage}>
                 <svg className='cross-icon' viewBox='0 0 100 100'>
                     <rect x='46' y='10' width='8' height='80' transform='rotate(45 50 50)' />
                     <rect x='46' y='10' width='8' height='80' transform='rotate(-45 50 50)' />
