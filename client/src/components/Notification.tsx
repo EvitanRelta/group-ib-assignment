@@ -8,7 +8,7 @@ interface NotificationProps {
 }
 
 export const Notification: React.FC<NotificationProps> = ({ messageId, content }) => {
-    const FADE_TIME_MS = 500
+    const FADE_TIME_MS = 300
     const settingsState = useContext(SettingsContext)
     const messagesState = useContext(MessagesContext)
     const [fadeOut, setFadeOut] = useState(false)
