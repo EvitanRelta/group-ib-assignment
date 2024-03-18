@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react'
-import { SettingsContext } from './contexts/settingsState'
-import { MessagesContext } from './contexts/messagesState'
+import { SettingsContext, MessagesContext } from '../contexts'
 
 interface NotificationProps {
     messageId: string

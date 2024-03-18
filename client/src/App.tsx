@@ -1,10 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { MainPage } from './MainPage'
-import { SettingsPage } from './SettingsPage'
-import { SettingsProvider } from './contexts/settingsState'
-import { NavBar } from './NavBar'
-import { MessagesProvider } from './contexts/messagesState'
+import { MainPage, SettingsPage } from './pages'
+import { SettingsProvider, MessagesProvider } from './contexts'
+import { NavBar } from './components/NavBar'
 
 export const App: React.FC = () => {
     return (
