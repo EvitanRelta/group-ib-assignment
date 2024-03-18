@@ -1,0 +1,55 @@
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 32px;
+}
+
+.settings-container label {
+    font-family: 'Roboto';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.settings-title {
+    width: 38.6%;
+}
+
+.settings-box {
+    max-width: 912px;
+    border-radius: 16px;
+    background-color: rgba(3, 9, 25, 1);
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16));
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.settings-input {
+    display: flex;
+    align-items: center;
+}
+
+.settings-options {
+    display: flex;
+    justify-content: space-between;
+    width: 61.4%;
+}
+
+.settings-input-box {
+    font-family: 'Roboto';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.9);
+
+    width: 50px;
+    background-color: transparent;
+    border: none;
+}
