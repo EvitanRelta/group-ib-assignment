@@ -15,6 +15,23 @@ export const NotificationList: React.FC<NotificationListProps> = ({
 }) => {
     const [notifPayloads, setNotifPayloads] = useState<NotificationPayload[]>([])
 
+    useEffect(() => {
+        const eventSource = new EventSource('http://localhost:9000/events')
+
+        eventSource.onmessage = (event) => {
+            const payload: NotificationPayload = JSON.parse(event.data)
+            setNotifPayloads((prevPayloads) => [...prevPayloads, payload])
+        }
+
+        eventSource.onerror = (error) => {
+            console.error('EventSource error:', error)
+        }
+
+        return () => {
+            eventSource.close()
+        }
+    }, [])
+
     const handleRemoveItem = (messageId: string) => {
         setNotifPayloads((prevItems) => prevItems.filter((item) => item.msg_id !== messageId))
     }
