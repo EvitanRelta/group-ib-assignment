@@ -30,16 +30,40 @@ export const SettingsProvider: React.FC<any> = ({ children }) => {
     })
 
     useEffect(() => {
-        localStorage.setItem('maxCount', maxCount.toString())
-    }, [maxCount])
+        const handleStorageEvent = (event: StorageEvent) => {
+            if (event.key === 'maxCount') {
+                setMaxCount(parseInt(event.newValue || DEFAULT_COUNT.toString(), 10))
+            } else if (event.key === 'position') {
+                setPosition(parseInt(event.newValue || DEFAULT_POSITION.toString(), 10))
+            } else if (event.key === 'disappearTime') {
+                setDisappearTime(parseInt(event.newValue || DEFAULT_DISAPPEAR_TIME.toString(), 10))
+            }
+        }
 
-    useEffect(() => {
-        localStorage.setItem('position', position.toString())
-    }, [position])
+        window.addEventListener('storage', handleStorageEvent)
 
-    useEffect(() => {
-        localStorage.setItem('disappearTime', disappearTime.toString())
-    }, [disappearTime])
+        return () => {
+            window.removeEventListener('storage', handleStorageEvent)
+        }
+    }, [])
+
+    const updateMaxCount = (value: number) => {
+        setMaxCount(value)
+        localStorage.setItem('maxCount', value.toString())
+        window.dispatchEvent(new Event('settingsUpdated'))
+    }
+
+    const updatePosition = (value: number) => {
+        setPosition(value)
+        localStorage.setItem('position', value.toString())
+        window.dispatchEvent(new Event('settingsUpdated'))
+    }
+
+    const updateDisappearTime = (value: number) => {
+        setDisappearTime(value)
+        localStorage.setItem('disappearTime', value.toString())
+        window.dispatchEvent(new Event('settingsUpdated'))
+    }
 
     return (
         <SettingsContext.Provider
@@ -47,9 +71,9 @@ export const SettingsProvider: React.FC<any> = ({ children }) => {
                 maxCount,
                 position,
                 disappearTime,
-                setMaxCount,
-                setPosition,
-                setDisappearTime,
+                setMaxCount: updateMaxCount,
+                setPosition: updatePosition,
+                setDisappearTime: updateDisappearTime,
             }}
         >
             {children}
