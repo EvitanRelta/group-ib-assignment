@@ -38,7 +38,7 @@ export const NotificationList: React.FC<NotificationListProps> = ({
 
     return (
         <div>
-            {notifPayloads.map((payload) => (
+            {notifPayloads.slice(0, maxCount).map((payload) => (
                 <Notification
                     key={payload.msg_id}
                     messageId={payload.msg_id}
