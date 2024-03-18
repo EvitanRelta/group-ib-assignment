@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { MainPage, SettingsPage } from './pages'
 import { SettingsProvider, MessagesProvider } from './contexts'
 import { NavBar } from './components/NavBar'
+import './app.css'
 
 export const App: React.FC = () => {
     return (
