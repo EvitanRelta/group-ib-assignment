@@ -30,22 +30,41 @@ export const MessagesProvider: React.FC<any> = ({ children }) => {
             console.error('EventSource error:', error)
         }
 
+        const handleStorageEvent = (event: StorageEvent) => {
+            if (event.key === 'messages') {
+                setMessages(JSON.parse(event.newValue || '[]'))
+            }
+        }
+
+        window.addEventListener('storage', handleStorageEvent)
+
         return () => {
             eventSource.close()
+            window.removeEventListener('storage', handleStorageEvent)
         }
     }, [])
-
-    useEffect(() => {
-        localStorage.setItem('messages', JSON.stringify(messages))
-    }, [messages])
 
     const removeMessage = (messageId: string) => {
         setMessages((messages) => {
             const updatedMessages = messages.filter((x) => x.msg_id !== messageId)
             localStorage.setItem('messages', JSON.stringify(updatedMessages))
+            window.dispatchEvent(new Event('messagesUpdated'))
             return updatedMessages
         })
     }
+
+    useEffect(() => {
+        const handleMessagesUpdated = () => {
+            const storedMessages = localStorage.getItem('messages')
+            setMessages(storedMessages ? JSON.parse(storedMessages) : [])
+        }
+
+        window.addEventListener('messagesUpdated', handleMessagesUpdated)
+
+        return () => {
+            window.removeEventListener('messagesUpdated', handleMessagesUpdated)
+        }
+    }, [])
 
     return (
         <MessagesContext.Provider
