@@ -1,5 +1,5 @@
-export interface Notification {
+export interface NotificationPayload {
     msg_id: string
     msg: string
-    time: string
+    time: number
 }
