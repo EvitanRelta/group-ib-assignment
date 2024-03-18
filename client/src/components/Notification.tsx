@@ -38,6 +38,12 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
             }}
         >
             <div className='notif-text'>{content}</div>
+            <button className='close-button'>
+                <svg className='cross-icon' viewBox='0 0 100 100'>
+                    <rect x='46' y='10' width='8' height='80' transform='rotate(45 50 50)' />
+                    <rect x='46' y='10' width='8' height='80' transform='rotate(-45 50 50)' />
+                </svg>
+            </button>
         </div>
     )
 }
