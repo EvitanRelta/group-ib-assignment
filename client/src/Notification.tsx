@@ -1,19 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { SettingsContext } from './settingsState'
 
 interface NotificationProps {
     messageId: string
     content: string
-    disappearTime: number
     onRemove: (id: string) => void
 }
 
-export const Notification: React.FC<NotificationProps> = ({
-    messageId,
-    content,
-    disappearTime,
-    onRemove,
-}) => {
+export const Notification: React.FC<NotificationProps> = ({ messageId, content, onRemove }) => {
     const FADE_TIME_MS = 500
+    const settings = useContext(SettingsContext)
     const [fadeOut, setFadeOut] = useState(false)
     const timerRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -23,7 +19,7 @@ export const Notification: React.FC<NotificationProps> = ({
             setTimeout(() => {
                 onRemove(messageId)
             }, FADE_TIME_MS)
-        }, disappearTime)
+        }, settings.disappearTime)
 
         return () => {
             if (timerRef.current) {

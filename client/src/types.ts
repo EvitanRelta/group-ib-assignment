@@ -3,9 +3,3 @@ export interface NotificationPayload {
     msg: string
     time: number
 }
-
-export interface Settings {
-    maxCount: number
-    position: number
-    disappearTime: number
-}

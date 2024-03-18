@@ -1,11 +1,10 @@
 import React from 'react'
 import { NotificationList } from './NotificationList'
-import { Settings } from './types'
 
-export const Main: React.FC<Settings> = (settings) => {
+export const Main: React.FC = () => {
     return (
         <div>
-            <NotificationList {...settings} />
+            <NotificationList />
         </div>
     )
 }

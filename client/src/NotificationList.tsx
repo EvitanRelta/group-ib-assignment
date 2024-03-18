@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { NotificationPayload, Settings } from './types'
+import React, { useContext, useEffect, useState } from 'react'
+import { NotificationPayload } from './types'
 import { Notification } from './Notification'
+import { SettingsContext } from './settingsState'
 
-export const NotificationList: React.FC<Settings> = ({ maxCount, position, disappearTime }) => {
+export const NotificationList: React.FC = () => {
+    const settings = useContext(SettingsContext)
     const [notifPayloads, setNotifPayloads] = useState<NotificationPayload[]>([])
 
     useEffect(() => {
@@ -28,12 +30,11 @@ export const NotificationList: React.FC<Settings> = ({ maxCount, position, disap
 
     return (
         <div>
-            {notifPayloads.slice(0, maxCount).map((payload) => (
+            {notifPayloads.slice(0, settings.maxCount).map((payload) => (
                 <Notification
                     key={payload.msg_id}
                     messageId={payload.msg_id}
                     content={payload.msg}
-                    disappearTime={disappearTime}
                     onRemove={handleRemoveItem}
                 />
             ))}

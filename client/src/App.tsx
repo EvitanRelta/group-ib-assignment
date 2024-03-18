@@ -1,18 +1,12 @@
-import React, { useState } from 'react'
-import { Settings } from './types'
+import React from 'react'
 import { Main } from './Main'
+import { SettingsProvider } from './settingsState'
 
 const App: React.FC = () => {
-    const [settings, setSettings] = useState<Settings>({
-        maxCount: 2,
-        disappearTime: 5000,
-        position: 0,
-    })
-
     return (
-        <div>
-            <Main {...settings} />
-        </div>
+        <SettingsProvider>
+            <Main />
+        </SettingsProvider>
     )
 }
 
