@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { SettingsContext } from './settingsState'
+import { SettingsContext } from './contexts/settings'
 
 export const SettingsPage: React.FC = () => {
     const settings = useContext(SettingsContext)

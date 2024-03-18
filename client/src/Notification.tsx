@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react'
-import { SettingsContext } from './settingsState'
+import { SettingsContext } from './contexts/settings'
 
 interface NotificationProps {
     messageId: string

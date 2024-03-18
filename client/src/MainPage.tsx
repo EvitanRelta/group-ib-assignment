@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Message } from './types'
 import { Notification } from './Notification'
-import { SettingsContext } from './settingsState'
+import { SettingsContext } from './contexts/settings'
 
 export const MainPage: React.FC = () => {
     const settings = useContext(SettingsContext)
