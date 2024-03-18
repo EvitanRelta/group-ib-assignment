@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Message } from './types'
 import { Notification } from './Notification'
-import { SettingsContext } from './contexts/settings'
+import { SettingsContext } from './contexts/settingsState'
 
 export const MainPage: React.FC = () => {
-    const settings = useContext(SettingsContext)
+    const settingsState = useContext(SettingsContext)
     const [messages, setMessages] = useState<Message[]>([])
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export const MainPage: React.FC = () => {
 
     return (
         <div>
-            {messages.slice(0, settings.maxCount).map((payload) => (
+            {messages.slice(0, settingsState.maxCount).map((payload) => (
                 <Notification
                     key={payload.msg_id}
                     messageId={payload.msg_id}

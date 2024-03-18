@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react'
-import { SettingsContext } from './contexts/settings'
+import { SettingsContext } from './contexts/settingsState'
 
 interface NotificationProps {
     messageId: string
@@ -9,7 +9,7 @@ interface NotificationProps {
 
 export const Notification: React.FC<NotificationProps> = ({ messageId, content, onRemove }) => {
     const FADE_TIME_MS = 500
-    const settings = useContext(SettingsContext)
+    const settingsState = useContext(SettingsContext)
     const [fadeOut, setFadeOut] = useState(false)
     const timerRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -19,7 +19,7 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content, 
             setTimeout(() => {
                 onRemove(messageId)
             }, FADE_TIME_MS)
-        }, settings.disappearTime)
+        }, settingsState.disappearTime)
 
         return () => {
             if (timerRef.current) {

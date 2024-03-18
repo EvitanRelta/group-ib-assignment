@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
-import { SettingsContext } from './contexts/settings'
+import { SettingsContext } from './contexts/settingsState'
 
 export const SettingsPage: React.FC = () => {
-    const settings = useContext(SettingsContext)
+    const settingsState = useContext(SettingsContext)
     return (
         <div>
             <div>
                 <label>Notification count</label>
                 <input
                     type='number'
-                    value={settings.maxCount}
-                    onChange={(e) => settings.setMaxCount(Number(e.target.value))}
+                    value={settingsState.maxCount}
+                    onChange={(e) => settingsState.setMaxCount(Number(e.target.value))}
                 />
             </div>
             <div>
@@ -21,8 +21,8 @@ export const SettingsPage: React.FC = () => {
                             <input
                                 type='radio'
                                 value={i}
-                                checked={settings.position === i}
-                                onChange={() => settings.setPosition(i)}
+                                checked={settingsState.position === i}
+                                onChange={() => settingsState.setPosition(i)}
                             />
                             Position {i}
                         </label>
@@ -33,8 +33,8 @@ export const SettingsPage: React.FC = () => {
                 <label>Notification disappear time</label>
                 <input
                     type='number'
-                    value={settings.disappearTime}
-                    onChange={(e) => settings.setDisappearTime(Number(e.target.value) * 1000)}
+                    value={settingsState.disappearTime}
+                    onChange={(e) => settingsState.setDisappearTime(Number(e.target.value) * 1000)}
                 />
                 <span>sec</span>
             </div>
