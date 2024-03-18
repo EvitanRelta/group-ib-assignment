@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { NotificationPayload } from './types'
+import { NotificationPayload, Settings } from './types'
 import { Notification } from './Notification'
 
-interface NotificationListProps {
-    maxCount: number
-    position: number
-    disappearTime: number
-}
-
-export const NotificationList: React.FC<NotificationListProps> = ({
-    maxCount,
-    position,
-    disappearTime,
-}) => {
+export const NotificationList: React.FC<Settings> = ({ maxCount, position, disappearTime }) => {
     const [notifPayloads, setNotifPayloads] = useState<NotificationPayload[]>([])
 
     useEffect(() => {
