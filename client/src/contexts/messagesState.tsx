@@ -9,14 +9,21 @@ interface MessagesContextType {
 //@ts-ignore
 export const MessagesContext = createContext<MessagesContextType>()
 export const MessagesProvider: React.FC<any> = ({ children }) => {
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages, setMessages] = useState<Message[]>(() => {
+        const storedMessages = localStorage.getItem('messages')
+        return storedMessages ? JSON.parse(storedMessages) : []
+    })
 
     useEffect(() => {
         const eventSource = new EventSource('http://localhost:9000/events')
 
         eventSource.onmessage = (event) => {
             const newMessage: Message = JSON.parse(event.data)
-            setMessages((messages) => [...messages, newMessage])
+            setMessages((messages) => {
+                const updatedMessages = [...messages, newMessage]
+                localStorage.setItem('messages', JSON.stringify(updatedMessages))
+                return updatedMessages
+            })
         }
 
         eventSource.onerror = (error) => {
@@ -28,8 +35,16 @@ export const MessagesProvider: React.FC<any> = ({ children }) => {
         }
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem('messages', JSON.stringify(messages))
+    }, [messages])
+
     const removeMessage = (messageId: string) => {
-        setMessages((messages) => messages.filter((x) => x.msg_id !== messageId))
+        setMessages((messages) => {
+            const updatedMessages = messages.filter((x) => x.msg_id !== messageId)
+            localStorage.setItem('messages', JSON.stringify(updatedMessages))
+            return updatedMessages
+        })
     }
 
     return (
