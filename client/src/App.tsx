@@ -1,13 +1,20 @@
 import React from 'react'
-import { Main } from './Main'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { MainPage } from './MainPage'
+import { SettingsPage } from './SettingsPage'
 import { SettingsProvider } from './settingsState'
+import { NavBar } from './NavBar'
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
     return (
         <SettingsProvider>
-            <Main />
+            <Router>
+                <NavBar />
+                <Routes>
+                    <Route path='/' element={<MainPage />} />
+                    <Route path='/settings' element={<SettingsPage />} />
+                </Routes>
+            </Router>
         </SettingsProvider>
     )
 }
-
-export default App
