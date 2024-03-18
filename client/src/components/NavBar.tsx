@@ -1,20 +1,20 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import './NavBar.css'
 
 export const NavBar: React.FC = () => (
     <nav>
-        <div>Notification task</div>
-        <ul>
-            <li>
-                <NavLink to='/' className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Main
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to='/settings' className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Settings
-                </NavLink>
-            </li>
-        </ul>
+        <div className='nav-container'>
+            <div className='nav-title'>Notification task</div>
+            <NavLink to='/' className={({ isActive }) => (isActive ? 'nav-tab active' : 'nav-tab')}>
+                Main
+            </NavLink>
+            <NavLink
+                to='/settings'
+                className={({ isActive }) => (isActive ? 'nav-tab active' : 'nav-tab')}
+            >
+                Settings
+            </NavLink>
+        </div>
     </nav>
 )
