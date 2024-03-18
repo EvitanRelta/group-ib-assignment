@@ -34,7 +34,7 @@ export const SettingsPage: React.FC = () => {
                 <input
                     type='number'
                     value={settingsState.disappearTime}
-                    onChange={(e) => settingsState.setDisappearTime(Number(e.target.value) * 1000)}
+                    onChange={(e) => settingsState.setDisappearTime(Number(e.target.value))}
                 />
                 <span>sec</span>
             </div>

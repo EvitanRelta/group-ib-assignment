@@ -19,7 +19,7 @@ export const Notification: React.FC<NotificationProps> = ({ messageId, content }
             setTimeout(() => {
                 messagesState.removeMessage(messageId)
             }, FADE_TIME_MS)
-        }, settingsState.disappearTime)
+        }, settingsState.disappearTime * 1000)
 
         return () => {
             if (timerRef.current) {

@@ -14,7 +14,7 @@ export const SettingsContext = createContext<SettingsContextType>()
 export const SettingsProvider: React.FC<any> = ({ children }) => {
     const [maxCount, setMaxCount] = useState(2)
     const [position, setPosition] = useState(0)
-    const [disappearTime, setDisappearTime] = useState(5000)
+    const [disappearTime, setDisappearTime] = useState(5)
 
     return (
         <SettingsContext.Provider
